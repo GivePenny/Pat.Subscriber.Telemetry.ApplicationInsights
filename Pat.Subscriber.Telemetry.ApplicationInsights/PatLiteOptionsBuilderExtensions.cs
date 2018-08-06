@@ -4,9 +4,10 @@ namespace Pat.Subscriber.Telemetry.ApplicationInsights
 {
     public static class PatLiteOptionsBuilderExtensions
     {
-        public static PatLiteOptionsBuilder WithApplicationInsightsMonitoring(this PatLiteOptionsBuilder optionsBuilder)
+        public static IPatLiteOptionsBuilder WithApplicationInsightsMonitoring(this IPatLiteOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.With<MonitoringMessageProcessingBehaviour>();
+            // TODO PR in Pat.Subscriber repo to add With<> methods to IPatLiteOptionsBuilder
+            ((PatLiteOptionsBuilder)optionsBuilder).With<MonitoringMessageProcessingBehaviour>();
             return optionsBuilder;
         }
     }

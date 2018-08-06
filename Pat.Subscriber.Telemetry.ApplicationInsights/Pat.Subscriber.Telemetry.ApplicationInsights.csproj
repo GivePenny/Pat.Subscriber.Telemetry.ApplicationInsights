@@ -2,6 +2,16 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>GivePenny</Authors>
+    <Company>GivePenny</Company>
+    <Product>Pat</Product>
+    <Description>Monitoring extension for Pat to report metrics to Application Insights.</Description>
+    <Copyright>GivePenny</Copyright>
+    <PackageLicenseUrl>https://github.com/GivePenny/Pat.Subscriber.Telemetry.ApplicationInsights/License.md</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/GivePenny/Pat.Subscriber.Telemetry.ApplicationInsights</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/GivePenny/Pat.Subscriber.Telemetry.ApplicationInsights</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <PackageTags>Pat</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
