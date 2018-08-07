@@ -43,8 +43,11 @@ namespace Pat.Subscriber.Telemetry.ApplicationInsights
             var enqueuedTimeUtc = messageContext.Message.SystemProperties.EnqueuedTimeUtc;
             var timeFromQueueToCompletion = telemetry.Timestamp + telemetry.Duration - enqueuedTimeUtc;
 
+            // Attempt to compensate a little for clock differences
+            var timeFromQueueToCompletionSeconds = Math.Max(timeFromQueueToCompletion.TotalSeconds, telemetry.Duration.TotalSeconds);
+
             telemetry.Success = exception != null;
-            telemetry.Metrics.Add("QueueToCompletionTimeSeconds", timeFromQueueToCompletion.TotalSeconds);
+            telemetry.Metrics.Add("QueueToCompletionTimeSeconds", timeFromQueueToCompletionSeconds);
         }
     }
 }
