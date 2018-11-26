@@ -48,7 +48,7 @@ namespace Pat.Subscriber.Telemetry.ApplicationInsights
             // Attempt to compensate a little for clock differences
             var timeFromQueueToCompletionSeconds = Math.Max(timeFromQueueToCompletion.TotalSeconds, telemetry.Duration.TotalSeconds);
 
-            telemetry.Success = exception == null;
+            telemetry.Success = exception == null ? (bool?)true : null;
             telemetry.Metrics.Add("QueueToCompletionTimeSeconds", timeFromQueueToCompletionSeconds);
         }
     }
