@@ -26,6 +26,7 @@ namespace Pat.Subscriber.Telemetry.ApplicationInsights
                 try
                 {
                     await next(messageContext);
+                    Enrich(operation.Telemetry, messageContext);
                 }
                 catch (Exception exception)
                 {
@@ -33,8 +34,10 @@ namespace Pat.Subscriber.Telemetry.ApplicationInsights
                     Enrich(operation.Telemetry, messageContext, exception);
                     throw;
                 }
-
-                Enrich(operation.Telemetry, messageContext);
+                finally
+                {
+                    telemetryClient.StopOperation(operation);
+                }
             }
         }
 
@@ -46,7 +49,7 @@ namespace Pat.Subscriber.Telemetry.ApplicationInsights
             // Attempt to compensate a little for clock differences
             var timeFromQueueToCompletionSeconds = Math.Max(timeFromQueueToCompletion.TotalSeconds, telemetry.Duration.TotalSeconds);
 
-            telemetry.Success = exception != null;
+            telemetry.Success = exception == null;
             telemetry.Metrics.Add("QueueToCompletionTimeSeconds", timeFromQueueToCompletionSeconds);
         }
     }
