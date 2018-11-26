@@ -32,12 +32,11 @@ namespace Pat.Subscriber.Telemetry.ApplicationInsights
                 {
                     // It's the logger's responsibility to record the exception details.
                     Enrich(operation.Telemetry, messageContext, exception);
+                    telemetryClient.StopOperation(operation);
                     throw;
                 }
-                finally
-                {
-                    telemetryClient.StopOperation(operation);
-                }
+
+                telemetryClient.StopOperation(operation);
             }
         }
 
