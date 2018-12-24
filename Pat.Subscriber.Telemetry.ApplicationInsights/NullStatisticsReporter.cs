@@ -21,7 +21,7 @@ namespace Pat.Subscriber.Telemetry.ApplicationInsights
             return new State();
         }
 
-        public void Timer(string @event, string tags, int time)
+        public void Timer(string @event, string tags, TimeSpan duration)
         {
         }
     }
