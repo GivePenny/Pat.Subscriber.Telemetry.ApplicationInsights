@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <Authors>GivePenny</Authors>
     <Company>GivePenny</Company>
     <Product>Pat</Product>
@@ -15,10 +15,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Azure.Management.ServiceBus" Version="1.4.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.1.1" />
-    <PackageReference Include="Pat.Subscriber.NetCoreDependencyResolution" Version="3.0.30" />
-    <PackageReference Include="Microsoft.ApplicationInsights" Version="2.8.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
+    <PackageReference Include="Pat.Subscriber.NetCoreDependencyResolution" Version="4.0.43" />
+    <PackageReference Include="Microsoft.ApplicationInsights" Version="2.17.0" />
   </ItemGroup>
 
 </Project>

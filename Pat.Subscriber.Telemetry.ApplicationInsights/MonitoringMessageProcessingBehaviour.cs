@@ -19,25 +19,24 @@ namespace Pat.Subscriber.Telemetry.ApplicationInsights
         {
             var messageType = messageContext.Message.UserProperties["MessageType"].ToString();
 
-            using (var operation = telemetryClient.StartOperation<RequestTelemetry>(
+            using var operation = telemetryClient.StartOperation<RequestTelemetry>(
                 messageType,
-                messageContext.CorrelationId))
+                messageContext.CorrelationId);
+
+            try
             {
-                try
-                {
-                    await next(messageContext);
-                    MarkSuccessful(operation.Telemetry);
-                }
-                catch (Exception)
-                {
-                    // It's the logger's responsibility to record the exception details, this module simply records the message request
-                    MarkAsFailed(operation.Telemetry);
-                    throw;
-                }
-                finally
-                {
-                    Enrich(operation.Telemetry, messageContext);
-                }
+                await next(messageContext);
+                MarkSuccessful(operation.Telemetry);
+            }
+            catch (Exception)
+            {
+                // It's the logger's responsibility to record the exception details, this module simply records the message request
+                MarkAsFailed(operation.Telemetry);
+                throw;
+            }
+            finally
+            {
+                Enrich(operation.Telemetry, messageContext);
             }
         }
 
